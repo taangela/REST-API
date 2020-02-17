@@ -1,7 +1,11 @@
 {
+  "scripts": {
+    "start": "npx nodemon server.js"
+  },
   "dependencies": {
     "express": "4.17.1",
     "nodemon": "1.19.1",
     "uuid": "^3.4.0"
   }
 }
+ 
