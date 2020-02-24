@@ -22,6 +22,7 @@ router.route('/seats').post((req, res) => {
     db.seats.push({ id: id, day: day, seat: seat, client: client, email: email });
     res.json({ message: 'OK' });
   }
+  req.io.emit('seatsUpdated', db.seats);
 });
 
 router.route('/seats:id').delete((req, res) => {
