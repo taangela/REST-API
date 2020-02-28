@@ -1,7 +1,5 @@
 const express = require('express');
 const router = express.Router();
-//const db = require('../db.js');
-//const uuidv4 = require('uuid/v4');
 const Seats = require('../models/Seats.model');
 
 
