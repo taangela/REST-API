@@ -4,21 +4,16 @@ const path = require('path');
 const socket = require('socket.io');
 const mongoose = require('mongoose');
 
-
-
 const testimonialsRoutes = require('./routes/testimonials.routes');
 const concertsRoutes = require('./routes/concerts.routes');
 const seatsRoutes = require('./routes/seats.routes');
 
-
 const app = express();
 
 app.use(express.static(path.join(__dirname + '/client/build')));
-
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cors())
-
 app.use((req, res, next) => {
   req.io = io;
   next();
@@ -36,7 +31,9 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname + '/client/build/index.html'));
 });
 
-mongoose.connect('mongodb://localhost:27017/NewWaveDB', { useNewUrlParser: true });
+//mongoose.connect('mongodb+srv://tangela:dementor123@cluster0-stxdz.mongodb.net/NewWaveDB?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('mongodb://localhost:27017/NewWaveDB', { useNewUrlParser: true, });
+
 const db = mongoose.connection;
 
 db.once('open', () => {
@@ -52,4 +49,7 @@ const io = socket(server);
 
 io.on('connection', (socket) => {
   console.log('New socket! Its id – ' + socket.id);
+  socket.on('seatsUpdated', () => {
+    console.log('I got something');
+  });
 });

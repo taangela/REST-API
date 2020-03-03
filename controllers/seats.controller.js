@@ -24,12 +24,20 @@ exports.getId = async (req, res) => {
 
 exports.post = async (req, res) => {
   const { day, seat, client, email } = req.body;
+  const io = req.io;
 
   try {
-    const newSeats = new Seats({ day: day, seat: seat, client: client, email: email });
-    await newSeats.save();
-    res.json(await Seats.find());
-    
+    Seats.where('day').equals(day).where('seat').equals(seat).exec(async function (err, seats) {
+      if(seats.length > 0) {
+        res.status(403).json({ message: 'The slot is already taken...' });
+      } else {
+        const newSeats = new Seats({ day: day, seat: seat, client: client, email: email });
+        await newSeats.save();
+        const seats = await Seats.find();
+        res.json(seats);
+        io.emit('seatsUpdated', seats);   
+      }
+    });
   } catch(err) {
     res.status(500).json(err);
   }
