@@ -23,13 +23,14 @@ app.use('/api/', testimonialsRoutes);
 app.use('/api/', concertsRoutes);
 app.use('/api/', seatsRoutes);
 
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname + '/client/build/index.html'));
+});
+
 app.use((req, res) => {
   res.status(404).json({ message: 'Not found...' });
 })
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname + '/client/build/index.html'));
-});
 
 mongoose.connect('mongodb+srv://tangela:dementor123@cluster0-stxdz.mongodb.net/NewWaveDB?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
 //mongoose.connect('mongodb://localhost:27017/NewWaveDB', { useNewUrlParser: true, });
