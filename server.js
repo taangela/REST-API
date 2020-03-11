@@ -32,7 +32,7 @@ app.use((req, res) => {
 })
 
 
-mongoose.connect('mongodb+srv://tangela:dementor123@cluster0-stxdz.mongodb.net/NewWaveDB?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('mongodb+srv://tangela:${process.env.atlasPassword}@cluster0-stxdz.mongodb.net/NewWaveDB?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
 //mongoose.connect('mongodb://localhost:27017/NewWaveDB', { useNewUrlParser: true, });
 
 const db = mongoose.connection;
