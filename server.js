@@ -32,8 +32,6 @@ app.use((req, res) => {
 })
 const test = process.env.atlasPassword;
 
-
-
 mongoose.connect('mongodb+srv://tangela:'+test+'@cluster0-stxdz.mongodb.net/NewWaveDB?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
 //mongoose.connect('mongodb://localhost:27017/NewWaveDB', { useNewUrlParser: true, });
 //${process.env.atlasPassword}
