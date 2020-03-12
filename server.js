@@ -3,6 +3,8 @@ const cors = require('cors');
 const path = require('path');
 const socket = require('socket.io');
 const mongoose = require('mongoose');
+const helmet = require('helmet');
+
 
 const testimonialsRoutes = require('./routes/testimonials.routes');
 const concertsRoutes = require('./routes/concerts.routes');
@@ -14,6 +16,7 @@ app.use(express.static(path.join(__dirname + '/client/build')));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cors())
+app.use(helmet());
 app.use((req, res, next) => {
   req.io = io;
   next();
@@ -30,9 +33,9 @@ app.get('*', (req, res) => {
 app.use((req, res) => {
   res.status(404).json({ message: 'Not found...' });
 })
-const test = process.env.atlasPassword;
+//const test = process.env.atlasPassword;
 
-mongoose.connect('mongodb+srv://tangela:'+test+'@cluster0-stxdz.mongodb.net/NewWaveDB?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('mongodb+srv://tangela:dementor123@cluster0-stxdz.mongodb.net/NewWaveDB?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
 //mongoose.connect('mongodb://localhost:27017/NewWaveDB', { useNewUrlParser: true, });
 //${process.env.atlasPassword}
 const db = mongoose.connection;
