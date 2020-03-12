@@ -30,11 +30,12 @@ app.get('*', (req, res) => {
 app.use((req, res) => {
   res.status(404).json({ message: 'Not found...' });
 })
+const test = process.env.kocham;
+console.log('test: ', test);
 
-
-mongoose.connect('mongodb+srv://tangela:${process.env.atlasPassword}@cluster0-stxdz.mongodb.net/NewWaveDB?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('mongodb+srv://tangela:dementor123@cluster0-stxdz.mongodb.net/NewWaveDB?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
 //mongoose.connect('mongodb://localhost:27017/NewWaveDB', { useNewUrlParser: true, });
-
+//${process.env.atlasPassword}
 const db = mongoose.connection;
 
 db.once('open', () => {
